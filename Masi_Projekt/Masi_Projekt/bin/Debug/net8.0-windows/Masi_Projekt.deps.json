@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Masi_Projekt/1.0.0": {
+        "runtime": {
+          "Masi_Projekt.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Masi_Projekt/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
