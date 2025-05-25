@@ -20,4 +20,13 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+    private void InputButton_Click(object sender, RoutedEventArgs e)
+    {
+        var inputWindow = new InputWindow();
+        inputWindow.ShowDialog();
+    }
+    private void SwitchTheme_Click(object sender, RoutedEventArgs e)
+    {
+        App.ThemeManager.SetTheme("Dark"); // albo "Light"
+    }
 }
