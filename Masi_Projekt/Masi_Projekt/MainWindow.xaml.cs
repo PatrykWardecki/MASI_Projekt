@@ -27,6 +27,6 @@ public partial class MainWindow : Window
     }
     private void SwitchTheme_Click(object sender, RoutedEventArgs e)
     {
-        App.ThemeManager.SetTheme("Dark"); // albo "Light"
+        ThemeManager.ToggleTheme();
     }
 }

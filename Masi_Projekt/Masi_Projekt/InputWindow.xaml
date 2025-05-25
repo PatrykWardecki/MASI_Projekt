@@ -1,17 +1,43 @@
 ﻿<Window x:Class="Masi_Projekt.InputWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Wprowadź dane" Height="250" Width="400"
-        WindowStartupLocation="CenterScreen">
+        Title="Wprowadź dane" Height="270" Width="420"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFF0F2F5"
+        ResizeMode="NoResize">
     <Grid>
-        <Border Margin="20" Padding="20" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
+        <Border Margin="20"
+                Padding="20"
+                CornerRadius="10"
+                BorderBrush="#DDDDDD"
+                BorderThickness="1"
+                Background="White"
+                SnapsToDevicePixels="True">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="270" Opacity="0.3"/>
+            </Border.Effect>
+
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox Width="200" Height="30" Margin="0,0,0,10" />
-                <TextBox Width="200" Height="30" Margin="0,0,0,20" />
+                <TextBlock Text="Wprowadź dane"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="#333333"
+                           Margin="0 0 0 15"
+                           HorizontalAlignment="Center" />
+
+                <TextBox x:Name="InputBox1"
+                         Width="240" Height="30" Margin="0,0,0,10"
+                         Text="Wpisz wartość 1..." Foreground="Gray"
+                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
+
+                <TextBox x:Name="InputBox2"
+                         Width="240" Height="30" Margin="0,0,0,20"
+                         Text="Wpisz wartość 2..." Foreground="Gray"
+                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="Zatwierdź" Width="80" Margin="0,0,10,0" Click="Confirm_Click" />
-                    <Button Content="Anuluj" Width="80" Click="Cancel_Click" />
+                    <Button Content="Zatwierdź" Width="90" Margin="0,0,10,0" Click="Confirm_Click" />
+                    <Button Content="Anuluj" Width="90" Click="Cancel_Click" />
                 </StackPanel>
             </StackPanel>
         </Border>
