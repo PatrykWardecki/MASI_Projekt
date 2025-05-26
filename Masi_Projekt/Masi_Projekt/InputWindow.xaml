@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Masi_Projekt.InputWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Wprowadź dane" Height="270" Width="420"
+        Title="Wprowadź dane" Height="370" Width="520"
         WindowStartupLocation="CenterScreen"
         Background="#FFF0F2F5"
         ResizeMode="NoResize">
