@@ -1,0 +1,68 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Backup & temporary files
+*.bak
+*.tmp
+*~ 
+*.swp
+*.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Logs
+*.log
+
+# Publish directory
+publish/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Windows image file caches
+*.resx.bin
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+*.DotSettings.user
+
+# Local test results
+TestResults/
+
+# Visual Studio generated folders
+Generated_Code/
+
+# Ignore themes binaries if built
+Themes/bin/
+Themes/obj/
+
+# Ignore local configuration files
+appsettings.Local.json
+secrets.json

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Masi_Projekt")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d1dc454420186519485b81d2326bb6c18079e1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+910126a53e4df8ddd36f6cb98e8e908d7cf392df")]
 [assembly: System.Reflection.AssemblyProductAttribute("Masi_Projekt")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Masi_Projekt")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
