@@ -99,31 +99,56 @@ public partial class MainWindow : Window
             Margin = new Thickness(10)
         };
 
-        
         Canvas canvas = new Canvas
         {
             Width = 200,
             Height = 20
         };
 
-        Line segment = new Line
+        // Główna pozioma linia
+        Line mainLine = new Line
         {
-            X1 = 0,
+            X1 = 20,
             Y1 = 10,
-            X2 = 200,
+            X2 = 180,
             Y2 = 10,
             Stroke = Brushes.Red,
-            StrokeThickness = 4,
-            StrokeStartLineCap = PenLineCap.Round, // Dodaje widoczny początek
-            StrokeEndLineCap = PenLineCap.Round    // Dodaje widoczny koniec
+            StrokeThickness = 4
         };
 
-        canvas.Children.Add(segment);
+        // Pionowa kreska na początku (lewa)
+        Line startCap = new Line
+        {
+            X1 = 20,
+            Y1 = 1,
+            X2 = 20,
+            Y2 = 20,
+            Stroke = Brushes.Red,
+            StrokeThickness = 4
+        };
+
+        // Pionowa kreska na końcu (prawa)
+        Line endCap = new Line
+        {
+            X1 = 180,
+            Y1 = 1,
+            X2 = 180,
+            Y2 = 20,
+            Stroke = Brushes.Red,
+            StrokeThickness = 4
+        };
+
+        // Dodanie wszystkich linii do canvas
+        canvas.Children.Add(mainLine);
+        canvas.Children.Add(startCap);
+        canvas.Children.Add(endCap);
 
         TextBlock textBlock = new TextBlock
         {
             Text = $"{a} ; {b} ; {c}",
             FontSize = 25,
+            Foreground = Brushes.Black,
+            FontWeight = FontWeights.Bold,
             HorizontalAlignment = HorizontalAlignment.Center
         };
 
