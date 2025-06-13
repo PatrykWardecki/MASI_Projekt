@@ -25,3 +25,5 @@ C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\De
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PoziomaEliminacja.baml
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PionoweSekwencjonowanie.g.cs
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PoziomaEliminacja.g.cs
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ZamianaOkno.baml
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ZamianaOkno.g.cs

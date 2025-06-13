@@ -10,15 +10,22 @@ namespace Masi_Projekt;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private Canvas _lastSequencingCanvas;
+    private string _lastSequencingValue1;
+    private string _lastSequencingValue2;
+    
     public MainWindow()
     {
         InitializeComponent();
     }
+    
     private void InputButton_Click(object sender, RoutedEventArgs e)
     {
         var inputWindow = new PionoweSekwencjonowanie();
         if (inputWindow.ShowDialog() == true)
         {
+            _lastSequencingValue1 = inputWindow.Value1;
+            _lastSequencingValue2 = inputWindow.Value2;
             AddVerticalOperation(inputWindow.Value1, inputWindow.Value2);
         }
     }
@@ -31,13 +38,16 @@ public partial class MainWindow : Window
             AddHorizontalOperation(inputWindow.Value1, inputWindow.Value2, inputWindow.Value3);
         }
     }
+    
     private void SwitchTheme_Click(object sender, RoutedEventArgs e)
     {
         ThemeManager.ToggleTheme();
     }
+    
     private void AddVerticalOperation(string a, string b)
     {
-        // Kontener
+        VerticalContainer.Child = null;
+
         Canvas canvas = new Canvas
         {
             Width = 80,
@@ -45,7 +55,6 @@ public partial class MainWindow : Window
             Margin = new Thickness(10)
         };
 
-        // Półkole pionowe (otwarte z lewej)
         Path path = new Path
         {
             Stroke = Brushes.Green,
@@ -54,45 +63,42 @@ public partial class MainWindow : Window
         };
 
         PathGeometry geometry = new PathGeometry();
-        PathFigure figure = new PathFigure
-        {
-            StartPoint = new Point(10, 0)  // Początek łuku (góra)
-        };
-
+        PathFigure figure = new PathFigure { StartPoint = new Point(10, 0) };
         figure.Segments.Add(new ArcSegment
         {
-            Point = new Point(10, 160),            // Koniec łuku (dół)
-            Size = new Size(60, 60),              // Promień łuku
-            SweepDirection = SweepDirection.Counterclockwise, // Otwarty z lewej
+            Point = new Point(10, 160),
+            Size = new Size(60, 60),
+            SweepDirection = SweepDirection.Counterclockwise,
             IsLargeArc = false
         });
-
         geometry.Figures.Add(figure);
         path.Data = geometry;
 
-        // Tekst (wewnątrz półkola)
         TextBlock text = new TextBlock
         {
             Text = $"{a}\n;\n{b}",
             FontSize = 25,
             Foreground = Brushes.Black,
             FontWeight = FontWeights.Bold,
-            TextAlignment = TextAlignment.Center,
+            TextAlignment = TextAlignment.Center
         };
 
-        // Umieszczenie tekstu w środku łuku
-        Canvas.SetLeft(text, -5);  // Przesuń trochę w lewo
-        Canvas.SetTop(text, 30);   // Wyśrodkuj w pionie
+        Canvas.SetLeft(text, -5);
+        Canvas.SetTop(text, 30);
 
-        // Dodanie elementów
         canvas.Children.Add(path);
         canvas.Children.Add(text);
 
-        ResultsPanel.Children.Add(canvas);
+        VerticalContainer.Child = canvas;
+
+        // Zapisz ostatnie sekwencjonowanie
+        _lastSequencingCanvas = canvas;
     }
 
     private void AddHorizontalOperation(string a, string b, string c)
     {
+        HorizontalContainer.Child = null;
+
         StackPanel container = new StackPanel
         {
             Orientation = Orientation.Vertical,
@@ -105,7 +111,6 @@ public partial class MainWindow : Window
             Height = 20
         };
 
-        // Główna pozioma linia
         Line mainLine = new Line
         {
             X1 = 20,
@@ -116,7 +121,6 @@ public partial class MainWindow : Window
             StrokeThickness = 4
         };
 
-        // Pionowa kreska na początku (lewa)
         Line startCap = new Line
         {
             X1 = 20,
@@ -127,7 +131,6 @@ public partial class MainWindow : Window
             StrokeThickness = 4
         };
 
-        // Pionowa kreska na końcu (prawa)
         Line endCap = new Line
         {
             X1 = 180,
@@ -138,7 +141,6 @@ public partial class MainWindow : Window
             StrokeThickness = 4
         };
 
-        // Dodanie wszystkich linii do canvas
         canvas.Children.Add(mainLine);
         canvas.Children.Add(startCap);
         canvas.Children.Add(endCap);
@@ -155,8 +157,195 @@ public partial class MainWindow : Window
         container.Children.Add(canvas);
         container.Children.Add(textBlock);
 
-        ResultsPanel.Children.Add(container);
+        HorizontalContainer.Child = container;
+    }
+    
+    private void ZamianaButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (_lastSequencingCanvas == null || HorizontalContainer.Child == null)
+        {
+            MessageBox.Show("Najpierw dodaj operację sekwencjonowania i eliminacji.");
+            return;
+        }
+
+        var oknoZamiany = new ZamianaOkno();
+        if (oknoZamiany.ShowDialog() == true)
+        {
+            string selected = oknoZamiany.SelectedOption;
+            var eliminacja = HorizontalContainer.Child as StackPanel;
+            if (eliminacja != null)
+            {
+                // Pobierz oryginalne wartości PRZED usunięciem tekstu
+                string[] originalValues = {"1", "2", "3"}; // Domyślne wartości jako fallback
+                
+                if (eliminacja.Children.Count > 1)
+                {
+                    var originalText = eliminacja.Children[1] as TextBlock;
+                    if (originalText != null)
+                    {
+                        originalValues = originalText.Text.Split(new string[] { " ; " }, System.StringSplitOptions.None);
+                        // Wyczyść białe znaki z każdej wartości
+                        for (int i = 0; i < originalValues.Length; i++)
+                        {
+                            originalValues[i] = originalValues[i].Trim();
+                        }
+                    }
+                    
+                    // Teraz usuń stary tekst
+                    eliminacja.Children.RemoveAt(1);
+                }
+
+                // Stwórz nowy kontener z operacją sekwencjonowania zastępującą wybraną wartość
+                StackPanel newContainer = CreateReplacementContainer(selected, originalValues);
+                
+                // Dodaj nowy kontener
+                eliminacja.Children.Add(newContainer);
+            }
+        }
     }
 
+    private StackPanel CreateReplacementContainer(string selectedOption, string[] originalValues)
+    {
+        StackPanel container = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(10)
+        };
 
+        // Określ, która pozycja ma być zastąpiona
+        int replaceIndex = selectedOption == "1" ? 0 :
+                          selectedOption == "2" ? 1 :
+                          selectedOption == "3" ? 2 : -1;
+
+        for (int i = 0; i < originalValues.Length; i++)
+        {
+            if (i == replaceIndex)
+            {
+                // Wstaw operację sekwencjonowania
+                Canvas sequencingCanvas = CreateSmallSequencingCanvas();
+                container.Children.Add(sequencingCanvas);
+            }
+            else
+            {
+                // Wstaw oryginalną wartość
+                TextBlock valueText = new TextBlock
+                {
+                    Text = originalValues[i],
+                    FontSize = 25,
+                    Foreground = Brushes.Black,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(5)
+                };
+                container.Children.Add(valueText);
+            }
+
+            // Dodaj separator (;) między elementami, ale nie po ostatnim
+            if (i < originalValues.Length - 1)
+            {
+                TextBlock separator = new TextBlock
+                {
+                    Text = " ; ",
+                    FontSize = 25,
+                    Foreground = Brushes.Black,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                container.Children.Add(separator);
+            }
+        }
+
+        return container;
+    }
+
+    private Canvas CreateSmallSequencingCanvas()
+    {
+        Canvas canvas = new Canvas
+        {
+            Width = 60,
+            Height = 100,
+            Margin = new Thickness(5),
+            VerticalAlignment = VerticalAlignment.Center
+        };
+
+        Path path = new Path
+        {
+            Stroke = Brushes.Green,
+            StrokeThickness = 3,
+            Fill = Brushes.Transparent
+        };
+
+        PathGeometry geometry = new PathGeometry();
+        PathFigure figure = new PathFigure { StartPoint = new Point(8, 10) };
+        figure.Segments.Add(new ArcSegment
+        {
+            Point = new Point(8, 90),
+            Size = new Size(40, 40),
+            SweepDirection = SweepDirection.Counterclockwise,
+            IsLargeArc = false
+        });
+        geometry.Figures.Add(figure);
+        path.Data = geometry;
+
+        TextBlock text = new TextBlock
+        {
+            Text = $"{_lastSequencingValue1}\n;\n{_lastSequencingValue2}",
+            FontSize = 16,
+            Foreground = Brushes.Black,
+            FontWeight = FontWeights.Bold,
+            TextAlignment = TextAlignment.Center
+        };
+
+        Canvas.SetLeft(text, -8);
+        Canvas.SetTop(text, 25);
+
+        canvas.Children.Add(path);
+        canvas.Children.Add(text);
+
+        return canvas;
+    }
+
+    private Canvas CloneCanvas(Canvas original)
+    {
+        Canvas clone = new Canvas
+        {
+            Width = original.Width,
+            Height = original.Height,
+            Margin = original.Margin
+        };
+
+        foreach (UIElement child in original.Children)
+        {
+            if (child is Path path)
+            {
+                Path newPath = new Path
+                {
+                    Stroke = path.Stroke,
+                    StrokeThickness = path.StrokeThickness,
+                    Fill = path.Fill,
+                    Data = path.Data.Clone()
+                };
+                clone.Children.Add(newPath);
+            }
+            else if (child is TextBlock textBlock)
+            {
+                TextBlock newText = new TextBlock
+                {
+                    Text = textBlock.Text,
+                    FontSize = textBlock.FontSize,
+                    Foreground = textBlock.Foreground,
+                    FontWeight = textBlock.FontWeight,
+                    TextAlignment = textBlock.TextAlignment
+                };
+
+                Canvas.SetLeft(newText, Canvas.GetLeft(textBlock));
+                Canvas.SetTop(newText, Canvas.GetTop(textBlock));
+
+                clone.Children.Add(newText);
+            }
+        }
+
+        return clone;
+    }
 }
