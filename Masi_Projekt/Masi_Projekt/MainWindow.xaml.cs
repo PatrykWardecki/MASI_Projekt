@@ -13,6 +13,7 @@ public partial class MainWindow : Window
     private Canvas _lastSequencingCanvas;
     private string _lastSequencingValue1;
     private string _lastSequencingValue2;
+    private string[] _lastEliminationValues; // Dodane pole do przechowywania wartości eliminacji
     
     public MainWindow()
     {
@@ -35,6 +36,8 @@ public partial class MainWindow : Window
         var inputWindow = new PoziomaEliminacja();
         if (inputWindow.ShowDialog() == true)
         {
+            // Zapisz wartości eliminacji
+            _lastEliminationValues = new string[] { inputWindow.Value1, inputWindow.Value2, inputWindow.Value3 };
             AddHorizontalOperation(inputWindow.Value1, inputWindow.Value2, inputWindow.Value3);
         }
     }
@@ -162,7 +165,7 @@ public partial class MainWindow : Window
     
     private void ZamianaButton_Click(object sender, RoutedEventArgs e)
     {
-        if (_lastSequencingCanvas == null || HorizontalContainer.Child == null)
+        if (_lastSequencingCanvas == null || HorizontalContainer.Child == null || _lastEliminationValues == null)
         {
             MessageBox.Show("Najpierw dodaj operację sekwencjonowania i eliminacji.");
             return;
@@ -175,23 +178,12 @@ public partial class MainWindow : Window
             var eliminacja = HorizontalContainer.Child as StackPanel;
             if (eliminacja != null)
             {
-                // Pobierz oryginalne wartości PRZED usunięciem tekstu
-                string[] originalValues = {"1", "2", "3"}; // Domyślne wartości jako fallback
+                // Użyj zapisanych wartości eliminacji zamiast parsowania tekstu
+                string[] originalValues = _lastEliminationValues;
                 
+                // Usuń stary tekst
                 if (eliminacja.Children.Count > 1)
                 {
-                    var originalText = eliminacja.Children[1] as TextBlock;
-                    if (originalText != null)
-                    {
-                        originalValues = originalText.Text.Split(new string[] { " ; " }, System.StringSplitOptions.None);
-                        // Wyczyść białe znaki z każdej wartości
-                        for (int i = 0; i < originalValues.Length; i++)
-                        {
-                            originalValues[i] = originalValues[i].Trim();
-                        }
-                    }
-                    
-                    // Teraz usuń stary tekst
                     eliminacja.Children.RemoveAt(1);
                 }
 
@@ -232,7 +224,7 @@ public partial class MainWindow : Window
                 TextBlock valueText = new TextBlock
                 {
                     Text = originalValues[i],
-                    FontSize = 25,
+                    FontSize = 20, // Zmniejszona czcionka dla lepszego wyświetlania
                     Foreground = Brushes.Black,
                     FontWeight = FontWeights.Bold,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -247,10 +239,11 @@ public partial class MainWindow : Window
                 TextBlock separator = new TextBlock
                 {
                     Text = " ; ",
-                    FontSize = 25,
+                    FontSize = 20, // Zmniejszona czcionka dla lepszego wyświetlania
                     Foreground = Brushes.Black,
                     FontWeight = FontWeights.Bold,
-                    VerticalAlignment = VerticalAlignment.Center
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(2)
                 };
                 container.Children.Add(separator);
             }
@@ -263,8 +256,8 @@ public partial class MainWindow : Window
     {
         Canvas canvas = new Canvas
         {
-            Width = 60,
-            Height = 100,
+            Width = 50, // Zmniejszona szerokość
+            Height = 80, // Zmniejszona wysokość
             Margin = new Thickness(5),
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -272,16 +265,16 @@ public partial class MainWindow : Window
         Path path = new Path
         {
             Stroke = Brushes.Green,
-            StrokeThickness = 3,
+            StrokeThickness = 2, // Zmniejszona grubość linii
             Fill = Brushes.Transparent
         };
 
         PathGeometry geometry = new PathGeometry();
-        PathFigure figure = new PathFigure { StartPoint = new Point(8, 10) };
+        PathFigure figure = new PathFigure { StartPoint = new Point(6, 8) };
         figure.Segments.Add(new ArcSegment
         {
-            Point = new Point(8, 90),
-            Size = new Size(40, 40),
+            Point = new Point(6, 72),
+            Size = new Size(32, 32), // Zmniejszony rozmiar łuku
             SweepDirection = SweepDirection.Counterclockwise,
             IsLargeArc = false
         });
@@ -291,14 +284,14 @@ public partial class MainWindow : Window
         TextBlock text = new TextBlock
         {
             Text = $"{_lastSequencingValue1}\n;\n{_lastSequencingValue2}",
-            FontSize = 16,
+            FontSize = 12, // Zmniejszona czcionka
             Foreground = Brushes.Black,
             FontWeight = FontWeights.Bold,
             TextAlignment = TextAlignment.Center
         };
 
         Canvas.SetLeft(text, -8);
-        Canvas.SetTop(text, 25);
+        Canvas.SetTop(text, 20);
 
         canvas.Children.Add(path);
         canvas.Children.Add(text);
