@@ -18,11 +18,10 @@ C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\De
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Masi_Projekt.pdb
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Masi_Projekt.genruntimeconfig.cache
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ref\Masi_Projekt.dll
-C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\InputWindow.baml
-C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\InputWindow.g.cs
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\App.baml
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Themes\DarkTheme.baml
 C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Themes\LightTheme.baml
+<<<<<<< HEAD
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\bin\Debug\net8.0-windows\Masi_Projekt.exe
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\bin\Debug\net8.0-windows\Masi_Projekt.deps.json
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\bin\Debug\net8.0-windows\Masi_Projekt.runtimeconfig.json
@@ -48,3 +47,11 @@ C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\De
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Masi_Projekt.pdb
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\Masi_Projekt.genruntimeconfig.cache
 C:\Users\wardusv3\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ref\Masi_Projekt.dll
+=======
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PionoweSekwencjonowanie.baml
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PoziomaEliminacja.baml
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PionoweSekwencjonowanie.g.cs
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\PoziomaEliminacja.g.cs
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ZamianaOkno.baml
+C:\Users\wardusV2\Documents\GitHub\MASI_Projekt\Masi_Projekt\Masi_Projekt\obj\Debug\net8.0-windows\ZamianaOkno.g.cs
+>>>>>>> FinishingApp
