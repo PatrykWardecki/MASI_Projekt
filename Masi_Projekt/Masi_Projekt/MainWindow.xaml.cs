@@ -13,7 +13,7 @@ public partial class MainWindow : Window
     private Canvas _lastSequencingCanvas;
     private string _lastSequencingValue1;
     private string _lastSequencingValue2;
-    private string[] _lastEliminationValues; // Dodane pole do przechowywania wartości eliminacji
+    private string[] _lastEliminationValues;
     
     public MainWindow()
     {
@@ -215,8 +215,8 @@ public partial class MainWindow : Window
             if (i == replaceIndex)
             {
                 // Wstaw operację sekwencjonowania
-                Canvas sequencingCanvas = CreateSmallSequencingCanvas();
-                container.Children.Add(sequencingCanvas);
+                Border sequencingBorder = CreateSmallSequencingElement();
+                container.Children.Add(sequencingBorder);
             }
             else
             {
@@ -224,7 +224,7 @@ public partial class MainWindow : Window
                 TextBlock valueText = new TextBlock
                 {
                     Text = originalValues[i],
-                    FontSize = 20, // Zmniejszona czcionka dla lepszego wyświetlania
+                    FontSize = 20,
                     Foreground = Brushes.Black,
                     FontWeight = FontWeights.Bold,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -239,7 +239,7 @@ public partial class MainWindow : Window
                 TextBlock separator = new TextBlock
                 {
                     Text = " ; ",
-                    FontSize = 20, // Zmniejszona czcionka dla lepszego wyświetlania
+                    FontSize = 20,
                     Foreground = Brushes.Black,
                     FontWeight = FontWeights.Bold,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -252,51 +252,63 @@ public partial class MainWindow : Window
         return container;
     }
 
-    private Canvas CreateSmallSequencingCanvas()
+    private Border CreateSmallSequencingElement()
     {
-        Canvas canvas = new Canvas
+        // Użyj Border jako kontenera dla lepszego kontrolowania wymiarów
+        Border border = new Border
         {
-            Width = 50, // Zmniejszona szerokość
-            Height = 80, // Zmniejszona wysokość
+            Width = 70,
+            Height = 60,
             Margin = new Thickness(5),
             VerticalAlignment = VerticalAlignment.Center
         };
 
+        Canvas canvas = new Canvas
+        {
+            Width = 70,
+            Height = 60
+        };
+
+        // Zmniejszony półokrąg
         Path path = new Path
         {
             Stroke = Brushes.Green,
-            StrokeThickness = 2, // Zmniejszona grubość linii
+            StrokeThickness = 2,
             Fill = Brushes.Transparent
         };
 
         PathGeometry geometry = new PathGeometry();
-        PathFigure figure = new PathFigure { StartPoint = new Point(6, 8) };
+        PathFigure figure = new PathFigure { StartPoint = new Point(10, 5) };
         figure.Segments.Add(new ArcSegment
         {
-            Point = new Point(6, 72),
-            Size = new Size(32, 32), // Zmniejszony rozmiar łuku
+            Point = new Point(10, 55),
+            Size = new Size(25, 25), // Znacznie zmniejszony rozmiar łuku
             SweepDirection = SweepDirection.Counterclockwise,
             IsLargeArc = false
         });
         geometry.Figures.Add(figure);
         path.Data = geometry;
 
+        // Tekst wewnątrz półokręgu
         TextBlock text = new TextBlock
         {
             Text = $"{_lastSequencingValue1}\n;\n{_lastSequencingValue2}",
-            FontSize = 12, // Zmniejszona czcionka
+            FontSize = 10, // Bardzo mała czcionka
             Foreground = Brushes.Black,
             FontWeight = FontWeights.Bold,
-            TextAlignment = TextAlignment.Center
+            TextAlignment = TextAlignment.Center,
+            LineHeight = 10 // Zmniejszona wysokość linii
         };
 
-        Canvas.SetLeft(text, -8);
-        Canvas.SetTop(text, 20);
+        // Lepsze pozycjonowanie tekstu w środku półokręgu
+        Canvas.SetLeft(text, 15);
+        Canvas.SetTop(text, 15);
 
         canvas.Children.Add(path);
         canvas.Children.Add(text);
-
-        return canvas;
+        
+        border.Child = canvas;
+        return border;
     }
 
     private Canvas CloneCanvas(Canvas original)
