@@ -8,19 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\wardusv3\\.nuget\\packages\\": {}
+    "C:\\Users\\wardusV2\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wardusv3\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\Masi_Projekt.csproj",
+      "projectUniqueName": "C:\\Users\\wardusV2\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\Masi_Projekt.csproj",
       "projectName": "Masi_Projekt",
-      "projectPath": "C:\\Users\\wardusv3\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\Masi_Projekt.csproj",
-      "packagesPath": "C:\\Users\\wardusv3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wardusv3\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\obj\\",
+      "projectPath": "C:\\Users\\wardusV2\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\Masi_Projekt.csproj",
+      "packagesPath": "C:\\Users\\wardusV2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wardusV2\\Documents\\GitHub\\MASI_Projekt\\Masi_Projekt\\Masi_Projekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\wardusv3\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\wardusV2\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
@@ -67,7 +67,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
